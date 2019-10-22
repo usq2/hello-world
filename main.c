@@ -1,91 +1,82 @@
 #include <stdio.h>
-#include <string.h>
-#include<stdlib.h>
+#include <stdlib.h>
+#include<string.h>
 #define MAXSIZE 3
 typedef struct
 {
-    char items[MAXSIZE][30];
-    int top;
-}stack;
-int isempty(stack s)
+    char items[MAXSIZE];
+    int f;
+    int r;
+}queue;
+int isfull(queue q)
 {
-    if(s.top==-1)
+    if(q.r==MAXSIZE-1)
         return 1;
     return 0;
 }
-int isfull(stack s)
+int isempty(queue q)
 {
-    if(s.top==MAXSIZE-1)
+    if(q.f==-1)
         return 1;
     return 0;
 }
-void push(stack *s,char data[30])
+void insert(queue *q,char data)
 {
-    strcpy(s->items[++s->top],data);
-    printf("%s is pushed onto stack",data);
+    q->items[++q->r]=data;
+    printf("%c is inserted in queue\n",data);
+    if(q->f==-1)
+        q->f=0;
 }
-char *pop(stack *s)
+char del(queue *q)
 {
-    return s->items[s->top--];
+    char el;
+    el=q->items[q->f];
+    if(q->f==q->r)
+        q->f=q->r=-1;
+    else
+        q->f=q->f+1;
+    return el;
 }
-void peek(stack s)
-{
-    printf("%s",s.items[s.top]);
-}
-void display(stack s,char data[30])
+void display(queue q)
 {
     int i;
-    for(i=s.top;i>=0;i--)
+    for(i=q.f;i<=q.r;i++)
     {
-        printf("%s",data);
+        printf("%c",q.items[i]);
     }
 }
 int main()
 {
-    stack s;
-    char data[30],res;
+    char d;
     int ch;
-    s.top=-1;
-   while(1)
-
-   {
-    printf("\n1.push\n2.pop\n3.peek\n4.display\n");
-    scanf("%d",&ch);
-    switch(ch)
+    queue q;
+    q.f=q.r=-1;
+    while(1)
     {
-       case 1:
-           if(isfull(s))
-           {
-               printf("stack overflow\n");
-           }
-           else
-           {
-               printf("enter data to push\n");
-               scanf("%s",data);
-               push(&s,data);
-           }
-           break;
-           case 2:if(isempty(s))
-               {
-                   printf("stack underflow\n");
-               }
-           else
-            printf("%s is popped from stack\n",pop(&s));
-           break;
-
-           case 3:
-               if(isempty(s))
-                printf("stack empty\n");
-               else
-               peek(s);
-           break;
-           case 4:if(isempty(s))
-           printf("stack empty\n");
-           else
-               display(s,data);
-           break;
-           default:exit(0);
+        printf("\n1.insert\n2.delete\n3.display\n");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1:if(isfull(q))
+            printf("queue full\n");
+            else
+            printf("enter data to be inserted\n");
+            getchar();
+            scanf("%c",&d);
+            insert(&q,d);
+            break;
+            case 2:if(isempty(q))
+            printf("queue empty\n");
+            else
+                printf("%c is deleted from queue",del(&q));
+            break;
+            case 3:if(isempty(q))
+            printf("Queue empty\n");
+            else
+                display(q);
+            break;
+            default:exit(0);
+        }
     }
-   }
     return 0;
 }

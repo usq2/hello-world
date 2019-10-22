@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1571778362 source:c:\users\ritesh\desktop\github\utqueueassignment\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
