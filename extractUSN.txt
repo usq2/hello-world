@@ -1,0 +1,11 @@
+sh-4.4$ cat file                                                                                                                                                             
+1si17cs051 meghana cse                                                                                                                                                       
+1si17cs046 sravya  cse                                                                                                                                                       
+1si17is051 madhu   ise                                                                                                                                                       
+1si17iso46 sunny   ise                                                                                                                                                       
+                                                                                                                                                                             
+sh-4.4$ cut -c 1-10 file                                                                                                                                                     
+1si17cs051                                                                                                                                                                   
+1si17cs046                                                                                                                                                                   
+1si17is051                                                                                                                                                                   
+1si17iso46    
