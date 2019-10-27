@@ -1,0 +1,13 @@
+$ cat file                                                                                                                                                             
+111 bujji cse                                                                                                                                                       
+222 sneha  cse                                                                                                                                                       
+333 mamata   ise                                                                                                                                                       
+444 chinni   ise  
+555 anu	  ece                                                                                                                                                     
+                                                                                                                                                                             
+$ cut -c 1-10 file                                                                                                                                                     
+111                                                                                                                                                                   
+222                                                                                                                                                                   
+333                                                                                                                                                                   
+444
+555    
