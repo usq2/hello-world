@@ -1,82 +1,93 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include<string.h>
-#define MAXSIZE 3
-typedef struct
+#include <string.h>
+#define MAXSIZE 4
+//Defining a Stack
+typedef struct stack
 {
-    char items[MAXSIZE];
-    int f;
-    int r;
-}queue;
-int isfull(queue q)
+    char item[MAXSIZE][10];
+    int top;
+}STACK;
+//Checking Whether the Stack is full
+int isfull(STACK s)
 {
-    if(q.r==MAXSIZE-1)
+    if(s.top==MAXSIZE-1)
         return 1;
     return 0;
 }
-int isempty(queue q)
+//Checking whether the Stack is empty
+int isempty(STACK s)
 {
-    if(q.f==-1)
+    if(s.top==-1)
         return 1;
     return 0;
 }
-void insert(queue *q,char data)
+//Functions
+//Inserting an item into the stack
+void push(STACK *s,char data[])
 {
-    q->items[++q->r]=data;
-    printf("%c is inserted in queue\n",data);
-    if(q->f==-1)
-        q->f=0;
+  strcpy(s->item[++s->top],data);
 }
-char del(queue *q)
+//Deleting an item from the stack
+char * pop(STACK *s)
 {
-    char el;
-    el=q->items[q->f];
-    if(q->f==q->r)
-        q->f=q->r=-1;
-    else
-        q->f=q->f+1;
-    return el;
+    return(s->item[s->top--]);
 }
-void display(queue q)
+//Display
+void display(STACK s)
 {
     int i;
-    for(i=q.f;i<=q.r;i++)
-    {
-        printf("%c",q.items[i]);
-    }
+    printf("\n The Stack Contents :\n BOS:-->");
+    for(i=0;i<=s.top;i++)
+        printf("%s-->",s.item[i]);
+    printf("TOS\n");
 }
+//Main Function
 int main()
 {
-    char d;
-    int ch;
-    queue q;
-    q.f=q.r=-1;
+    int choice;
+    char data[20];
+    STACK s;
+    s.top=-1;
+    printf("\n 1:PUSH\t 2:POP\t 3:DISPLAY\t4:EXIT\n");
     while(1)
     {
-        printf("\n1.insert\n2.delete\n3.display\n");
-        scanf("%d",&ch);
-        switch(ch)
-        {
-            case 1:if(isfull(q))
-            printf("queue full\n");
-            else
-            printf("enter data to be inserted\n");
-            getchar();
-            scanf("%c",&d);
-            insert(&q,d);
-            break;
-            case 2:if(isempty(q))
-            printf("queue empty\n");
-            else
-                printf("%c is deleted from queue",del(&q));
-            break;
-            case 3:if(isempty(q))
-            printf("Queue empty\n");
-            else
-                display(q);
-            break;
-            default:exit(0);
-        }
+        printf("\n Enter the choice : \t");
+        scanf("%d",&choice);
+         switch(choice)
+         {
+             case 1 : if(isfull(s))
+                        {
+                            printf("\n Full Stack \n");
+                           break;
+                        }
+                      else
+                      {
+                        printf("\nEnter the data to be inserted : \t");
+                        scanf("%s",data);
+                        push(&s,data);
+                      }
+                  break;
+             case 2 : if(isempty(s))
+                        {
+                            printf("\n Empty Stack \n");
+                            break;
+                        }
+                      else
+                      {
+                          printf("\n The data to be popped out is %s",pop(&s));
+                      }
+                  break;
+              case 3 : if(isempty(s))
+                        printf("\n Empty Stack \n");
+                      else
+                      {
+                          display(s);
+                      }
+                  break;
+              case 4 : exit(0);
+              default : printf("\n Invalid Input \n");
+         }
     }
     return 0;
 }
